@@ -1,0 +1,23 @@
+<html>
+    <body>
+        {% for comment in comments %}
+        <p>{{ comment }}</p>
+        {% endfor %}
+        <form method="POST" action="{{ url_for('add_comment') }}">
+            {{ myform.csrf_token }}
+            <p>
+                {{ myform.comment.label }}<br>
+                {{ myform.comment(rows=5, cols=40) }}
+            </p>
+            <p>
+                {% for error in myform.recaptcha.errors %}
+                    {{ error }}
+                {% endfor %}
+                {{ myform.recaptcha }}
+            </p>
+            <p>
+                <input type="submit" value="Add comment">
+            </p>
+        </form>
+    </body>
+</html>
